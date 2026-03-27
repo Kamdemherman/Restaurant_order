@@ -1,0 +1,16 @@
+<?php
+// FILE: app/Http/Middleware/NoIndexMiddleware.php
+namespace App\Http\Middleware;
+
+use Closure;
+use Illuminate\Http\Request;
+
+class NoIndexMiddleware
+{
+    public function handle(Request $request, Closure $next)
+    {
+        $response = $next($request);
+        $response->headers->set('X-Robots-Tag', 'noindex, nofollow, noarchive, nosnippet');
+        return $response;
+    }
+}
